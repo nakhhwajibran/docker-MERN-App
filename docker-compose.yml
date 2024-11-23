@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  nodejs:
+    container_name: "nodejs_cont"
+    build:
+      context: .
+    ports:
+      - "5001:5000"
+    depends_on:
+      - redis
+      - reactjs
+    networks:
+      - my-app-nw
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+    
+  reactjs:
+    container_name: "reactjs_cont"
+    build: 
+      context: ./client
+    ports:
+      - "3001:3000"
+    networks:
+      - my-app-nw
+    depends_on:
+      - redis
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3001/ || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    
+  redis:
+    container_name: "redis_cont"
+    image: redis:latest
+    networks:
+      - my-app-nw
+    ports:
+      - "6379:6379"
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+networks:
+  my-app-nw:
+    driver: bridge

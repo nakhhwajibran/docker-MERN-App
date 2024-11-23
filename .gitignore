@@ -1,0 +1,60 @@
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor configurations
+.vscode/
+.idea/
+*.swp
+
+# Test Coverage Reports
+coverage/
+
+# Miscellaneous
+*.pid
+*.seed
+*.pid.lock
+
+# React-specific
+*.cache/
+public/static/
+public/asset-manifest.json
+
+# MongoDB (if using local DB)
+*.lock
+dump/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Ignore specific files/folders generated during development
+npm-debug.log*
+debug.log
+pids/
+logs/
+
+# Ignore local database files (if applicable)
+*.sqlite
+*.sqlite3
